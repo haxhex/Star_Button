@@ -1,0 +1,161 @@
+.star-toggle {
+  --color-default: #7E7E86;
+  --face-color-default: #1A1A20;
+  --color-active: #F6C206;
+  --face-color-active: #845901;
+  --hole: #09090C;
+  --hole-inner: #121218;
+  --y: 0px;
+  --scale: 1;
+  --rotate: 0deg;
+  --hole-scale: 0;
+  --face-scale: 1;
+  --face-tear-o: 0;
+  --face-tear-y: -6px;
+  --face-tear-s: 1;
+  --toggle-y: 0px;
+  width: 40px;
+  height: 40px;
+  display: block;
+  cursor: pointer;
+  -webkit-transform: translateY(var(--toggle-y)) translateZ(0);
+          transform: translateY(var(--toggle-y)) translateZ(0);
+}
+.star-toggle:active {
+  --icon-s: .95;
+}
+.star-toggle input {
+  display: none;
+}
+.star-toggle input:checked + .icon {
+  --color: var(--color-active);
+  --face-color: var(--face-color-active);
+  --face-radius: 0 0 4px 4px;
+}
+.star-toggle .icon {
+  width: 64px;
+  height: 140px;
+  display: -webkit-box;
+  display: flex;
+  pointer-events: none;
+  position: relative;
+  -webkit-clip-path: ellipse(150% 50% at 50% 50%);
+          clip-path: ellipse(150% 50% at 50% 50%);
+  margin: -100px 0 0 -12px;
+  -webkit-transform: scale(var(--icon-s, 1)) translateZ(0);
+          transform: scale(var(--icon-s, 1)) translateZ(0);
+  -webkit-transform-origin: 50% 108px;
+          transform-origin: 50% 108px;
+  -webkit-transition: -webkit-transform .1s;
+  transition: -webkit-transform .1s;
+  transition: transform .1s;
+  transition: transform .1s, -webkit-transform .1s;
+}
+.star-toggle .icon:before {
+  content: '';
+  margin-top: auto;
+  display: block;
+  width: 64px;
+  height: 20px;
+  background: var(--hole);
+  box-shadow: inset 0 6px 0 0 var(--hole-inner);
+  border-radius: 100px / 30px;
+  -webkit-transform: scale(var(--hole-scale));
+          transform: scale(var(--hole-scale));
+  -webkit-transform-origin: 50% 100%;
+          transform-origin: 50% 100%;
+}
+.star-toggle .icon .star {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  left: 12px;
+  bottom: 0;
+  -webkit-transform: translateY(var(--y)) rotate(var(--rotate)) scale(var(--scale));
+          transform: translateY(var(--y)) rotate(var(--rotate)) scale(var(--scale));
+  border-radius: var(--radius, 0px);
+  background: var(--color, var(--color-default));
+  -webkit-clip-path: var(--clip, polygon(50% 0, 65% 32%, 100% 37%, 75% 63%, 80% 100%, 50% 79%, 20% 100%, 25% 63%, 0% 37%, 35% 32%));
+          clip-path: var(--clip, polygon(50% 0, 65% 32%, 100% 37%, 75% 63%, 80% 100%, 50% 79%, 20% 100%, 25% 63%, 0% 37%, 35% 32%));
+  -webkit-transition: border-radius .2s, background .2s, -webkit-clip-path .2s;
+  transition: border-radius .2s, background .2s, -webkit-clip-path .2s;
+  transition: clip-path .2s, border-radius .2s, background .2s;
+  transition: clip-path .2s, border-radius .2s, background .2s, -webkit-clip-path .2s;
+}
+.star-toggle .icon .star:before, .star-toggle .icon .star:after,
+.star-toggle .icon .star .eye {
+  content: '';
+  position: absolute;
+  background: var(--face-color, var(--face-color-default));
+  -webkit-transition: background .2s, box-shadow .2s;
+  transition: background .2s, box-shadow .2s;
+}
+.star-toggle .icon .star:before,
+.star-toggle .icon .star .eye {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  left: 21px;
+  top: 16px;
+}
+.star-toggle .icon .star:after {
+  width: 10px;
+  height: 4px;
+  border-radius: var(--face-radius, 4px 4px 0 0);
+  left: 15px;
+  top: 23px;
+  -webkit-transition: border-radius .2s;
+  transition: border-radius .2s;
+}
+.star-toggle .icon .star .eye {
+  left: 15px;
+  -webkit-transform: scaleY(var(--face-scale));
+          transform: scaleY(var(--face-scale));
+}
+.star-toggle .icon .star .eye:before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 5px;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: var(--face-color-default);
+  opacity: var(--face-tear-o);
+  -webkit-transform: translateY(var(--face-tear-y)) scaleY(var(--face-tear-s));
+          transform: translateY(var(--face-tear-y)) scaleY(var(--face-tear-s));
+}
+.star-toggle.star-bottom {
+  --clip: polygon(50% 0, 65% 32%, 100% 37%, 75% 63%, 83% 96%, 50% 79%, 17% 96%, 25% 63%, 0% 37%, 35% 32%);
+}
+.star-toggle.star-round {
+  --clip: polygon(50% 0%, 100% 0%, 100% 37%, 100% 63%, 100% 100%, 50% 100%, 0% 100%, 0% 63%, 0% 37%, 0% 0%);
+  --radius: 50%;
+}
+
+html {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: inherit;
+}
+*:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  min-height: 100vh;
+  display: -webkit-box;
+  display: flex;
+  font-family: 'Inter', Arial;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
+  background: #1A1A20;
+}
+body .star-toggle {
+  margin: 0 20px;
+}
